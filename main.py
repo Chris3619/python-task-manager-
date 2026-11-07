@@ -1,16 +1,4 @@
-def show_tasks(tasks):
-    print("\n===== 当前任务 =====")
-    for index, (title, completed) in enumerate(tasks, start=1):
-        mark = "✓" if completed else " "
-        print(f"{index}. [{mark}] {title}")
-
-    completed_count = sum(completed for _, completed in tasks)
-    print(
-        f"\n共 {len(tasks)} 个任务，已完成 {completed_count} 个，"
-        f"未完成 {len(tasks) - completed_count} 个。"
-    )
-
-
+from tasks import show_tasks
 def read_task_index(tasks):
     try:
         index = int(input("请输入任务编号: "))
@@ -19,8 +7,6 @@ def read_task_index(tasks):
     if 1 <= index <= len(tasks):
         return index - 1
     return None
-
-
 def main():
     tasks = [("学习 Python", True), ("学习 Git", True), ("学习 Linux", False)]
     menu = """===== TASK MANAGER =====
@@ -30,7 +16,6 @@ def main():
 4. 删除任务
 5. 退出程序
 """
-
     while True:
         print(menu)
         choice = input("请选择操作 (1-5): ").strip()
