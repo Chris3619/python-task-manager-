@@ -19,5 +19,17 @@ def read_task_index(tasks):
     if 1 <= index <= len(tasks):
         return index - 1
     return None
+def add_task(tasks, title):
+    title = title.strip()
 
+    if not title:
+        return "empty"
 
+    for existing_title, completed in tasks:
+        if title == existing_title:
+            return "duplicate"
+
+    tasks.append((title, False))
+    return "success"
+
+        

@@ -1,4 +1,5 @@
 from tasks import show_tasks
+from tasks import add_task
 def read_task_index(tasks):
     try:
         index = int(input("请输入任务编号: "))
@@ -22,11 +23,13 @@ def main():
 
         if choice == "1":
             title = input("请输入任务名称: ").strip()
-            if title:
-                tasks.append((title, False))
-                print("已添加任务。")
+            result = add_task(tasks,title)
+            if result == "success" :
+                print("添加成功")
+            elif result == "empty":
+                print("添加失败，该任务不能为空")
             else:
-                print("任务名称不能为空。")
+                print("添加失败，任务已存在")
         elif choice == "2":
             show_tasks(tasks)
         elif choice in ("3", "4"):
@@ -45,6 +48,7 @@ def main():
                     tasks[index] = (title, True)
                     print("已标记任务完成。")
             else:
+                title,_=tasks[index]
                 print(f"即将删除任务名称为：{title}")
                 ans = input("请确认是否删除（输入y删除，n取消删除）：")
                 if ans == "y":
