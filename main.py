@@ -53,12 +53,23 @@ def main():
             if index is None:
                 print("无效的任务编号。")
             elif choice == "3":
-                title, _ = tasks[index]
-                tasks[index] = (title, True)
-                print("已标记任务完成。")
+                title, state = tasks[index]
+                if state == True:
+                    print("该任务已经完成，无需标记")
+                else:
+                    tasks[index] = (title, True)
+                    print("已标记任务完成。")
             else:
-                tasks.pop(index)
-                print("已删除任务。")
+                print(f"即将删除任务名称为：{title}")
+                ans = input("请确认是否删除（输入y删除，n取消删除）：")
+                if ans == "y":
+                    tasks.pop(index)
+                    print("已删除任务。")
+                elif ans == "n":
+                    print("取消删除")
+                else:
+                    print("请输入y或者n")
+                    continue
         elif choice == "5":
             return
         else:
@@ -71,4 +82,6 @@ if __name__ == "__main__":
         main()
     except (EOFError, KeyboardInterrupt):
         print()
+
+
 
